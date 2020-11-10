@@ -25,8 +25,9 @@ SECRET_KEY = '#!7twjx0l$io+vj0gw1hhim1o2j*!(_j9z)4&cdie*n7%tp&ij'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -40,10 +41,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',
-    'auth_app'
+    'auth_app',
+    'corsheaders',
+    'calendar_app'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
