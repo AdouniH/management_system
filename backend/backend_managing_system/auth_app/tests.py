@@ -24,3 +24,8 @@ class AccountTests(APITestCase):
 
         username = Token.objects.get(key=response.data['token']).user.username
         self.assertEqual(username, 'houssem')
+
+class TokenViewTests(APITestCase):
+
+    def test_post_TokenView(self):
+        pass 

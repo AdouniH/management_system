@@ -1,24 +1,37 @@
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { connect, checkConnection } from './redux'
+import Routing from './routing'
+
 
 function App() {
+
+  var token = useSelector(state => state.auth.token)
+  var userdata = useSelector(state => state.auth.userdata)
+  var connected = useSelector(state => state.auth.connected)
+  var loading = useSelector(state => state.auth.loading)
+  const [userdatas, setUserdatas] = useState(userdata)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+      dispatch(checkConnection());
+  }, []);
+
+  var a = {
+    code: "string",
+    userdata: {
+        username: "string",
+        email: "string"
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-          <h1> HELLO WORLD </h1>
-      </header>
+        <Routing/>
     </div>
   );
 }

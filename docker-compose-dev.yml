@@ -6,8 +6,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile-dev
     volumes:
-       - "./backend/backend_managing_system/:/code/backend_managing_system/"
-       - "./backend/requirements.txt:/code/requirements.txt"
+       - "./backend/:/code/"
+       - "/home/houssem/Bureau/pwd.txt:/code/pwd.txt"
     ports:
       - "8000:8000"
 
@@ -16,7 +16,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile-dev
     volumes:
-       - "./frontend/front-management-system/src/:/code/front-management-system/src/"
+       - "./frontend/front-management-system/:/code/front-management-system/"
     stdin_open: true
     ports:
       - "3000:3000"
