@@ -1,0 +1,81 @@
+
+.body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(black, #9198e5);
+}
+
+.logwindow{
+    width: 400px;
+}
+
+.formLog{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 10px 14px 18px 0 rgba(0, 0, 0, 0.2), 10px 16px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.labelLog{
+    text-align: center;
+    margin-top: 25px !important;
+    margin-bottom: 15px !important;
+    margin: auto;
+}
+
+.limg{
+    height: 220px;
+    width: 220px;
+    margin: auto;
+    margin-bottom: 12px;
+    border-radius: 250px
+}
+
+.txtLog{
+    height: 35px;
+    width: 78%;
+    margin: auto;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: blue;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 4px 40px 4px 4px;
+    box-shadow: 10px 14px 18px 0 rgba(0, 0, 0, 0.2), 10px 16px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.buttonLog{
+    height: 39px;
+    width: 82%;
+    background-color: #004d00;
+    border: None;
+    margin: auto;
+    margin-bottom: 58px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.buttonLog:hover{
+    font-size: 16px;
+    background-color: #001a00;
+}
+
+.tempo1{
+    color: red;
+    top: -50px;
+    position: relative;
+    margin: auto;
+}
+
+.tempo2{
+    color: black;
+    top: -50px;
+    position: relative;
+    margin: auto;
+}

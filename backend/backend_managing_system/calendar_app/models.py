@@ -10,7 +10,10 @@ class Calendar(models.Model):
 class TeamLink(models.Model):
     booked = models.BooleanField(default=False)
     is_free = models.BooleanField(default=True)
-    link = models.CharField(max_length=5000)
+    link = models.CharField(max_length=5000, unique=True)
+
+    def __str__(self):
+        return self.link
 
 
 class Rdv(models.Model):
@@ -24,3 +27,6 @@ class Rdv(models.Model):
         on_delete=models.CASCADE,
     )
     comment = models.CharField(max_length=5000, null=True, blank=True)
+
+    def __str__(self):
+        return '{} - {}'.format(self.username, self.duree)

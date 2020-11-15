@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from calendar_app.business.business import arrange_crenaux
+from calendar_app.business.business import arrange_crenaux, datetime_to_readable, extract_hour
 from rest_framework import status
 
 from rest_framework.response import Response
@@ -31,7 +31,12 @@ class ShotPicker(APIView):
     def get(self, request, creneau_id, format=None):
         cr = Calendar.objects.get(id=creneau_id)
         serializer = CalendarSerializer(cr)
-        return Response(serializer.data)
+        context = serializer.data
+        date = datetime_to_readable(cr.creneau)
+        hour = extract_hour(cr.creneau)
+
+        context.update({'hour': hour, 'date': date})
+        return Response(context)
 
 
 class TeamsLInkPicker(APIView):
@@ -61,8 +66,10 @@ class RdvView(APIView):
                 link.delete()
 
                 send_mail(
-                    'Subject here',
-                    email.email_body,
+                    "Confirmation d'entretion",
+                    email.email_body.format(
+                        name=serializer.data['username'],
+                    ),
                     'noreply.houssem.adouni@gmail.com',
                     [serializer.data['email']],
                     fail_silently=False,

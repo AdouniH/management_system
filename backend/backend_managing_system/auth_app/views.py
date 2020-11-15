@@ -15,7 +15,7 @@ class CodeValidator(APIView):
 
     @token_from_code
     def post(self, request, format=None):
-        code = request.data["code"]
+        code = request.data["code"].strip()
         user = Account.objects.get(code=code).user
         token, created = Token.objects.get_or_create(user=user)
 

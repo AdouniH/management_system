@@ -15,7 +15,7 @@ function NavBar() {
   }
 
   const calendarclicked = () => {
-      history.push('/calendar')
+      history.push('/calendar');
   }
 
   return (

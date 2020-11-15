@@ -56,5 +56,5 @@ function Home() {
         history.push("/LoginPage");
     }, []);
 
-    return <h2>Home</h2>;
+    return <p>loading ...</p>;
 }

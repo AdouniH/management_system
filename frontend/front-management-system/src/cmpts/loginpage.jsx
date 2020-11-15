@@ -4,17 +4,21 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { connect, checkConnection } from '../redux'
 import {useHistory} from "react-router-dom";
-
+import logologin from './style/static/login.jpg'
 
 function Error(props) {
     return (
-        <p>ERROR</p>
+        <div className="tempo1">
+            <p>Saisissez un code valide</p>
+        </div>
     )
 }
 
 function Loading(props) {
     return (
-        <p>Loading</p>
+        <div className="tempo2">
+            <p>Loading...</p>
+        </div>
     )
 }
 
@@ -52,32 +56,30 @@ function LoginPage() {
     }
 
     function handleChange(event){
+        setError(null);
         setCode(event.target.value);
     }
 
-    var error_cmpt
+    var tempcomp
     if(error && !pageisLoading){
-        error_cmpt = <Error/>
+        tempcomp = <Error/>
     }
 
-    var loading_cmpt
     if(pageisLoading){
-        loading_cmpt = <Loading/>
+        tempcomp = <Loading/>
     }
 
     return (
-        <div>
-        <div className="logwindow">
-             <div>
-                 <form className="formLog" onSubmit={login}>
-                     <label className="labelLog" for="code">Veuillez saisir votre code</label>
-                     <input className="txtLog" name="code" type='text' value={code} onChange={handleChange}/>
-                     <input className="buttonLog" type='submit' value='Login'/>
-                     {error_cmpt}
-                     {loading_cmpt}
-                 </form>
+        <div className="body">
+            <div className="logwindow">
+                     <form className="formLog" onSubmit={login}>
+                         <label className="labelLog" for="code">Veuillez saisir votre code</label>
+                         <img className='limg' src={logologin}/>
+                         <input className="txtLog" autocomplete="off" name="code" type='text' value={code} onChange={handleChange}/>
+                         <input className="buttonLog" type='submit' value='Login'/>
+                         {tempcomp}
+                     </form>
              </div>
-         </div>
         </div>
     )
 }

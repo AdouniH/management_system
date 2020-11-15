@@ -4,13 +4,14 @@ import NavBar from './navbar.jsx'
 import axios from 'axios'
 import {useSelector} from 'react-redux'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import './style/shot.css'
 
 
 function Teams(props) {
   useEffect(() => {
     axios.get('http://localhost:8000/calendar/team')
         .then(function (response) {
-            props.setLink(response.data.link)
+            props.setLink(response.data.link);
         })
         .catch(function (error) {
         })
@@ -19,12 +20,7 @@ function Teams(props) {
 
   return (
       <div>
-          <h4>TEAMS</h4>
-          <input type='text' value={props.link}/>
-          <CopyToClipboard text={props.link}
-              onCopy={() => console.log("copied")}>
-              <button>COPY</button>
-          </CopyToClipboard>
+          <p className="info"> En confirmant la réunion vous recevez un mail de confirmation avec le lien de la reunion teams</p>
       </div>
   );
 }
@@ -32,12 +28,7 @@ function Teams(props) {
 function Skype() {
   return (
       <div>
-          <h4>SKYPE</h4>
-          <input type='text' value='adounih@skype.fr'/>
-          <CopyToClipboard text='adounih@skype.fr'
-              onCopy={() => console.log("copied")}>
-              <button>COPY</button>
-          </CopyToClipboard>
+        <p className="info"> En confirmant la réunion vous recevez un mail de confirmation avec mon identifiant Skype</p>
       </div>
   );
 }
@@ -45,12 +36,16 @@ function Skype() {
 function Phone() {
   return (
       <div>
-      <h4>PHONE</h4>
-      <input type='text' value='0758553568'/>
-      <CopyToClipboard text='0758553568'
-          onCopy={() => console.log("copied")}>
-          <button>COPY</button>
-      </CopyToClipboard>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+      <p className="infophone"> Voici mon muméro :</p>
+      <div className="center">
+          <input className='phone' type='text' value='0758553568'/>
+          <CopyToClipboard text='0758553568'
+              onCopy={() => console.log("copied")}>
+              <button class="btn" type="button"><i class="fa fa-copy"></i></button>
+          </CopyToClipboard>
+      </div>
       </div>
   );
 }
@@ -63,10 +58,12 @@ export default function ShotPicker(props) {
 
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
-  const [duree, setDuree] = useState('15');
+  const [duree, setDuree] = useState('30');
   const [toolvalue, setToolValue] = useState('teams');
   const [link, setLink] = useState(null);
   const [tarea, setTarea] = useState('');
+  const [date, setDate] = useState('');
+  const [hour, setHour] = useState('');
 
 
   const toolChanged = (event) => {
@@ -87,10 +84,10 @@ export default function ShotPicker(props) {
       axios.post('http://localhost:8000/calendar/rdv', context)
           .then(function (response) {
               console.log(response.data);
-              history.push("/formsucess")
+              history.push("/formsucess");
           })
           .catch(function (error) {
-            console.log(error.response.data)
+              console.log(error.response.data);
               history.push("/formfail");
           })
   }
@@ -102,7 +99,15 @@ export default function ShotPicker(props) {
               setEmail(response.data.userdata.email)
           })
           .catch(function (error) {
+          })
 
+      axios.get('http://localhost:8000/calendar/'+ id.toString())
+          .then(function (response) {
+              setDate(response.data.date);
+              setHour(response.data.hour);
+          })
+          .catch(function (error) {
+              history.push("/Calendar");
           })
   }, [])
 
@@ -111,64 +116,73 @@ export default function ShotPicker(props) {
       tool = <Teams link={link} setLink={setLink}/>
   }
   else if (toolvalue === 'skype'){
-      tool = <Skype />;
+      tool = <Skype/>;
   }
   else if (toolvalue === 'phone'){
-      tool = <Phone />;
+      tool = <Phone/>;
   }
 
   return (
-      <div>
+      <div className="all">
           <NavBar/>
-          <p>{id}</p>
-          <p>{username}</p>
-          <p>{email}</p>
-          <p>{duree}</p>
-          <button onClick={() => {history.push('/calendar')}}> Back </button>
-
-          <form onSubmit={SubmitForm}>
-              <h1>Hello username : {username} email : {email}</h1>
-              <p>Votre Nom</p>
-              <input
-                type='text'
-                name='username'
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-              />
-              <p>Votre Email</p>
-              <input
-                type='email'
-                name='email'
-                value={email}
-                required
-                onChange={(event) => setEmail(event.target.value)}
-              />
+          <form className="forma" onSubmit={SubmitForm}>
+              <div className='title'>
+                  <h4> Veuillez confirmer cet entretien du </h4>
+                  <h4> {date} à {hour}</h4>
+              </div>
+              <div className='rowform'>
+                  <p>Votre Nom</p>
+                  <input className='finput'
+                    type='text'
+                    name='username'
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
+                  />
+              </div>
+              <div className='rowform'>
+                  <p>Votre Email</p>
+                  <input className='finput'
+                    type='email'
+                    name='email'
+                    value={email}
+                    required
+                    onChange={(event) => setEmail(event.target.value)}
+                  />
+              </div>
               <br/>
-              <p>duree</p>
-              <select onChange={(event) => {setDuree(event.target.value)}}>
-                  <option value="15">15 minutes</option>
-                  <option value="30">30 minutes</option>
-                  <option value="60">1 heure</option>
-              </select>
+              <div className='rowform'>
+                  <p>Durée de l'entretien</p>
+                  <select onChange={(event) => {setDuree(event.target.value)}}>
+                      <option value="15">15 minutes</option>
+                      <option value="30" selected>30 minutes</option>
+                      <option value="60">1 heure</option>
+                  </select>
+              </div>
               <br/>
-              <p>Choisir outil </p>
-              <select onChange={toolChanged}>
-                  <option value="teams">Teams</option>
-                  <option value="skype">Skype</option>
-                  <option value="phone">Phone</option>
-              </select>
-
-              {tool}
-
-              <p> Comment (facultatif)</p>
-              <textarea
-                  id="comment"
-                  name="comment"
-                  value={tarea}
-                  onChange={(event) => {setTarea(event.target.value)}}>
-              </textarea>
+              <div className='rowform'>
+                  <p>Entretien via:</p>
+                  <select onChange={toolChanged}>
+                      <option value="teams">Microsoft Teams</option>
+                      <option value="skype">Skype</option>
+                      <option value="phone">Phone</option>
+                  </select>
+              </div>
+              <div className='rowform'>
+                  {tool}
+              </div>
+              <div className='rowform'>
+                  <p> Commentaire (facultatif)</p>
+                  <textarea
+                      id="comment"
+                      name="comment"
+                      value={tarea}
+                      onChange={(event) => {setTarea(event.target.value)}}>
+                  </textarea>
+              </div>
               <br/>
-              <input type='submit' value='yes'/>
+              <div className='rowform'>
+                  <input className='submitf' type='submit' value='confirmer votre rendez vous'/>
+              </div>
           </form>
       </div>
   );

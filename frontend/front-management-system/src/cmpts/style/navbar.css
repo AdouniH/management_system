@@ -1,3 +1,24 @@
 .dcnx{
     cursor: pointer;
 }
+
+.bar{
+    background: linear-gradient(black, #324230);
+    color: white;
+
+}
+
+.deconnexion{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    padding: 15px;
+}
+
+ul{
+  list-style: none;
+}
+
+.calendar{
+    cursor: pointer;
+}

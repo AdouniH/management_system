@@ -7,7 +7,7 @@ sur mon mail houssemadouni11@gmail.com
 
 Bonjour {name},
 
-Je vous confirme ma presence a cette reunion
+Je vous confirme ma presence a cet entretien
 
 Bien cordialement,
 Houssem ADOUNI
