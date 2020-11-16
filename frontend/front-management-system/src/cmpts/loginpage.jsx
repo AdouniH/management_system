@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { connect, checkConnection } from '../redux'
 import {useHistory} from "react-router-dom";
-import logologin from './style/static/login.jpg'
+import logologin from './style/statics/login.jpg'
 
 function Error(props) {
     return (
