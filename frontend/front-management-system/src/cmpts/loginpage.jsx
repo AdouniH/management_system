@@ -35,14 +35,14 @@ function LoginPage() {
 
 
     useEffect(() => {
-        if (connected){history.push('/Calendar')}
+        if (connected){history.push('/Calendar')};
     },);
 
     function login(event){
         event.preventDefault();
         setPageisLoading(true);
 
-        axios.post('http://localhost:8000/auth/', {code: code})
+        axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/', {code: code})
             .then(function (response) {
                 dispatch(connect(response.data.token, response.data.userdata));
                 localStorage.setItem('token', response.data.token);

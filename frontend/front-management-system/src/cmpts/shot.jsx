@@ -9,7 +9,7 @@ import './style/shot.css'
 
 function Teams(props) {
   useEffect(() => {
-    axios.get('http://localhost:8000/calendar/team')
+    axios.get(process.env.REACT_APP_BACKEND_URL + 'calendar/team')
         .then(function (response) {
             props.setLink(response.data.link);
         })
@@ -81,7 +81,7 @@ export default function ShotPicker(props) {
           crenau: id,
           comment: tarea
       }
-      axios.post('http://localhost:8000/calendar/rdv', context)
+      axios.post(process.env.REACT_APP_BACKEND_URL + 'calendar/rdv', context)
           .then(function (response) {
               console.log(response.data);
               history.push("/formsucess");
@@ -93,7 +93,7 @@ export default function ShotPicker(props) {
   }
 
   useEffect(() => {
-      axios.post('http://localhost:8000/auth/userdata_from_token/', {token: token})
+      axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
           .then(function (response) {
               setUsername(response.data.userdata.username)
               setEmail(response.data.userdata.email)
@@ -101,7 +101,7 @@ export default function ShotPicker(props) {
           .catch(function (error) {
           })
 
-      axios.get('http://localhost:8000/calendar/'+ id.toString())
+      axios.get(process.env.REACT_APP_BACKEND_URL + 'calendar/'+ id.toString())
           .then(function (response) {
               setDate(response.data.date);
               setHour(response.data.hour);

@@ -1,28 +1,24 @@
-# version: "3.3"
-#
-# services:
-#   backend:
-#     build:
-#       context: ./backend
-#       dockerfile: Dockerfile-dev
-#     volumes:
-#        - "./backend/backend_managing_system/:/code/backend_managing_system/"
-#     ports:
-#       - "8000:8000"
-#
-#   frontend:
-#     build:
-#       context: ./frontend
-#       dockerfile: Dockerfile-dev
-#     volumes:
-#        - "./frontend/front-management-system/src/:/code/front-management-system/src/"
-#     stdin_open: true
-#     ports:
-#       - "80:3000"
-#
-#   nginx:
-#     build: ./nginx
-#     ports:
-#       - "80:80"
-#     depends_on:
-#       - backend
+version: "3.3"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile-dev
+    volumes:
+       - "./backend/:/code/"
+       - "/home/houssem/Bureau/pwd.txt:/code/pwd.txt"
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile-dev
+    env_file:
+      - prod.env
+    volumes:
+       - "./frontend/front-management-system/:/code/front-management-system/"
+    stdin_open: true
+    ports:
+      - "3000:3000"

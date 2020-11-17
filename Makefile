@@ -24,3 +24,6 @@ test:
 
 shell:
 		sudo docker-compose -f docker-compose-dev.yml run backend python manage.py shell
+
+setup-dev:
+		sudo docker-compose -f docker-compose-dev.yml run frontend npm install

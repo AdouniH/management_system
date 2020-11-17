@@ -6,7 +6,7 @@ export const checkConnection = () => {
   return (dispatch) => {
       var token = localStorage.getItem('token');
       dispatch(load());
-      axios.post('http://localhost:8000/auth/userdata_from_token/', {token: token})
+      axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
         .then(response => {
             dispatch(connect(token, response.data.userdata))
         })

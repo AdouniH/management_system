@@ -11,7 +11,7 @@ function CheckLocalStorage(props) {
     const dispatch = useDispatch()
     const history = useHistory()
     useEffect(() => {
-        axios.post('http://localhost:8000/auth/userdata_from_token/', {token: localStorage.getItem('token')})
+        axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: localStorage.getItem('token')})
             .then(function (response){
             })
             .catch(function (error){

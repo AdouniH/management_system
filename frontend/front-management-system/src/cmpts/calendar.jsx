@@ -23,9 +23,9 @@ export default function Calendar() {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get('http://localhost:8000/calendar/')
+    axios.get(process.env.REACT_APP_BACKEND_URL + 'calendar/')
         .then(function (response) {
-            setData(response.data)
+            setData(response.data);
         })
         .catch(function (error) {
 
