@@ -26,6 +26,7 @@ function Loading(props) {
 function LoginPage() {
     const dispatch = useDispatch();
     var connected = useSelector(state => state.auth.connected);
+    var loader = useSelector(state => state.auth.loading);
 
     const [code, setCode] = useState("");
     const [error, setError] = useState("");
@@ -61,6 +62,7 @@ function LoginPage() {
     }
 
     var tempcomp
+
     if(error && !pageisLoading){
         tempcomp = <Error/>
     }
@@ -68,20 +70,22 @@ function LoginPage() {
     if(pageisLoading){
         tempcomp = <Loading/>
     }
-
-    return (
-        <div className="body">
-            <div className="logwindow">
-                     <form className="formLog" onSubmit={login}>
-                         <label className="labelLog" for="code">Veuillez saisir votre code</label>
-                         <img className='limg' src={logologin}/>
-                         <input className="txtLog" autocomplete="off" name="code" type='text' value={code} onChange={handleChange}/>
-                         <input className="buttonLog" type='submit' value='Login'/>
-                         {tempcomp}
-                     </form>
-             </div>
-        </div>
-    )
+    if (!loader){
+        return (
+            <div className="body">
+                <div className="logwindow">
+                         <form className="formLog" onSubmit={login}>
+                             <label className="labelLog" for="code">Veuillez saisir votre code</label>
+                             <img className='limg' src={logologin}/>
+                             <input className="txtLog" autocomplete="off" name="code" type='text' value={code} onChange={handleChange}/>
+                             <input className="buttonLog" type='submit' value='Login'/>
+                             {tempcomp}
+                         </form>
+                 </div>
+            </div>
+        )
+    }
+    else{return(<Loading/>)}
 }
 
 
