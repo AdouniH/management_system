@@ -4,19 +4,26 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile-dev
+      dockerfile: Dockerfile
     volumes:
        - "./backend/:/code/"
        - "/home/ubuntu/houssem_v1/pwd.txt:/code/pwd.txt"
     ports:
-      - "8000:8000"
+      - "8001:8000"
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile-dev
+      dockerfile: Dockerfile
     env_file:
       - prod.env
     stdin_open: true
     ports:
       - "80:3000"
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 8000:80
+    depends_on:
+      - backend

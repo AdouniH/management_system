@@ -13,9 +13,7 @@ inflection==0.5.1
 itypes==1.2.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
-numpy==1.19.4
 packaging==20.4
-pandas==1.1.4
 pyparsing==2.4.7
 python-dateutil==2.8.1
 pytz==2020.4
