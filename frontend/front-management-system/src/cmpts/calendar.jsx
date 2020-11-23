@@ -5,6 +5,7 @@ import CheckLocalStorage from './check_storage.jsx'
 import NavBar from './navbar.jsx'
 import {useHistory} from "react-router-dom";
 import './style/calendar.css';
+import {REACT_APP_BACKEND_URL} from '../config_urls.js'
 
 
 function Shot(props) {
@@ -23,7 +24,7 @@ export default function Calendar() {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + 'calendar/')
+    axios.get(REACT_APP_BACKEND_URL + 'calendar/')
         .then(function (response) {
             setData(response.data);
         })

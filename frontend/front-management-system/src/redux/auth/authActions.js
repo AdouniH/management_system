@@ -1,12 +1,13 @@
 import {CONNECT, DISCONNECT, LOAD} from './authTypes'
 import axios from 'axios'
+import {REACT_APP_BACKEND_URL} from '../../config_urls.js'
 
 
 export const checkConnection = () => {
   return (dispatch) => {
       var token = localStorage.getItem('token');
       dispatch(load());
-      axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
+      axios.post(REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
         .then(response => {
             dispatch(connect(token, response.data.userdata))
         })

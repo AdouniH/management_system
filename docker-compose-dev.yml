@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile-dev
     volumes:
        - "./backend/:/code/"
-       - "/home/houssem/Bureau/pwd.txt:/code/pwd.txt"
+       - ${pwd_file}:/code/pwd.txt
     ports:
       - "8000:8000"
 
@@ -15,8 +15,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile-dev
-    env_file:
-      - dev.env
+      args:
+        - REACT_APP_BACKEND_URL='http://localhost:8000/'
     volumes:
        - "./frontend/front-management-system/:/code/front-management-system/"
     stdin_open: true

@@ -6,23 +6,24 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-       - "./backend/:/code/"
-       - "/home/ubuntu/houssem_v1/pwd.txt:/code/pwd.txt"
-    ports:
-      - "8001:8000"
+       - ${static_root}:/code/static
+       - ${pwd_file}:/code/pwd.txt
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    env_file:
-      - prod.env
-    stdin_open: true
+      args:
+        - REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}
     ports:
-      - "80:3000"
+      - 80:80
 
   nginx:
-    build: ./nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    volumes:
+       - ${static_root}:/code/static
     ports:
       - 8000:80
     depends_on:

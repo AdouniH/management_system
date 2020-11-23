@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { connect, checkConnection } from '../redux'
 import {useHistory} from "react-router-dom";
 import logologin from './style/statics/login.jpg'
+import {REACT_APP_BACKEND_URL} from '../config_urls.js'
+
 
 function Error(props) {
     return (
@@ -42,8 +44,9 @@ function LoginPage() {
     function login(event){
         event.preventDefault();
         setPageisLoading(true);
+        alert(REACT_APP_BACKEND_URL + 'auth/')
 
-        axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/', {code: code})
+        axios.post(REACT_APP_BACKEND_URL + 'auth/', {code: code})
             .then(function (response) {
                 dispatch(connect(response.data.token, response.data.userdata));
                 localStorage.setItem('token', response.data.token);
@@ -51,6 +54,7 @@ function LoginPage() {
                 history.push("/Calendar");
             })
             .catch(function (error) {
+                alert("yes here")
                 setError('erreur');
                 setPageisLoading(false);
             })

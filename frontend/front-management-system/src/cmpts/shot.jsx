@@ -5,11 +5,12 @@ import axios from 'axios'
 import {useSelector} from 'react-redux'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './style/shot.css'
+import {REACT_APP_BACKEND_URL} from '../config_urls.js'
 
 
 function Teams(props) {
   useEffect(() => {
-    axios.get(process.env.REACT_APP_BACKEND_URL + 'calendar/team')
+    axios.get(REACT_APP_BACKEND_URL + 'calendar/team')
         .then(function (response) {
             props.setLink(response.data.link);
         })
@@ -81,7 +82,7 @@ export default function ShotPicker(props) {
           crenau: id,
           comment: tarea
       }
-      axios.post(process.env.REACT_APP_BACKEND_URL + 'calendar/rdv', context)
+      axios.post(REACT_APP_BACKEND_URL + 'calendar/rdv', context)
           .then(function (response) {
               console.log(response.data);
               history.push("/formsucess");
@@ -93,7 +94,7 @@ export default function ShotPicker(props) {
   }
 
   useEffect(() => {
-      axios.post(process.env.REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
+      axios.post(REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
           .then(function (response) {
               setUsername(response.data.userdata.username)
               setEmail(response.data.userdata.email)
@@ -101,7 +102,7 @@ export default function ShotPicker(props) {
           .catch(function (error) {
           })
 
-      axios.get(process.env.REACT_APP_BACKEND_URL + 'calendar/'+ id.toString())
+      axios.get(REACT_APP_BACKEND_URL + 'calendar/'+ id.toString())
           .then(function (response) {
               setDate(response.data.date);
               setHour(response.data.hour);
