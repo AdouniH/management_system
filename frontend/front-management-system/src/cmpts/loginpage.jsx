@@ -44,7 +44,6 @@ function LoginPage() {
     function login(event){
         event.preventDefault();
         setPageisLoading(true);
-        alert(REACT_APP_BACKEND_URL + 'auth/')
 
         axios.post(REACT_APP_BACKEND_URL + 'auth/', {code: code})
             .then(function (response) {
@@ -54,7 +53,6 @@ function LoginPage() {
                 history.push("/Calendar");
             })
             .catch(function (error) {
-                alert("yes here")
                 setError('erreur');
                 setPageisLoading(false);
             })
