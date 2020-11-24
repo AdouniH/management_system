@@ -22,7 +22,7 @@ class Rdv(models.Model):
     duree = models.CharField(max_length=5000)
     tool = models.CharField(max_length=5000)
     teams_link = models.CharField(max_length=5000, null=True)
-    crenau = models.OneToOneField(
+    crenau = models.ForeignKey(
         Calendar,
         on_delete=models.CASCADE,
     )

@@ -5,13 +5,10 @@ from auth_app.models import Account
 from rest_framework.authtoken.models import Token
 from drf_yasg.utils import swagger_auto_schema
 from auth_app.doc import token_from_code, code_from_token
-
+from rest_framework import status
 
 
 class CodeValidator(APIView):
-
-    def get(self, request, format=None):
-        return Response({"token": "token.key"})
 
     @token_from_code
     def post(self, request, format=None):
@@ -25,7 +22,8 @@ class CodeValidator(APIView):
                 "username": user.username,
                 "email": user.email
             }
-        })
+        }, status=status.HTTP_200_OK)
+
 
 class TokenView(APIView):
 

@@ -2,3 +2,4 @@
 static
 .spyproject
 db.sqlite3
+__pycache__
