@@ -30,7 +30,6 @@ services:
       dockerfile: Dockerfile-dev
     volumes:
        - "./backend/:/code/"
-       - ${pwd_file_path}:/code/pwd.txt
     ports:
       - "8000:8000"
     environment:

@@ -17,7 +17,7 @@ class TeamLink(models.Model):
 
 
 class Rdv(models.Model):
-    username = models.CharField(max_length=5000)
+    name = models.CharField(max_length=5000)
     email = models.EmailField(max_length=5000)
     duree = models.CharField(max_length=5000)
     tool = models.CharField(max_length=5000)
@@ -29,4 +29,4 @@ class Rdv(models.Model):
     comment = models.CharField(max_length=5000, null=True, blank=True)
 
     def __str__(self):
-        return '{} - {}'.format(self.username, self.duree)
+        return '{} - {}'.format(self.name, self.duree)

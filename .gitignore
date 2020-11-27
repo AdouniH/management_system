@@ -4,4 +4,5 @@ static
 db.sqlite3
 __pycache__
 .env
+*.env
 pwd.txt

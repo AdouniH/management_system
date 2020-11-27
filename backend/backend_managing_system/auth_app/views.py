@@ -36,6 +36,8 @@ class TokenView(APIView):
 
         return Response({
             "code": account.code,
+            "email": account.email.strip(),
+            "name": account.name.strip(),
             "userdata":{
                 "username": user.username,
                 "email": user.email

@@ -1,14 +1,38 @@
 
 email_body = """
-email envoyé en automatique depuis mon serveur  de test ...
-si vous avez recu ce message par erreur veuillez me le signaler
-sur mon mail houssemadouni11@gmail.com
----------------------------------------------------------------
+Bonjour,
 
-Bonjour {name},
+Je vous confirme ma présence à cet entretien.
 
-Je vous confirme ma presence a cet entretien
+Voici le lien de la réunion Microsoft Teams:
+
+{link}
 
 Bien cordialement,
 Houssem ADOUNI
+
+
+---------------------------------------------------------------
+Cet email est envoyée en automatique depuis mon application web www.houssem-adouni.com
+si vous recevez cet email par erreur veuillez me le signaler.
+---------------------------------------------------------------
+"""
+
+email_teams = """
+Bonjour,
+
+Je vous confirme ma présence à cet entretien
+
+Voici le lien de la réunion Microsoft Teams:
+
+{link}
+
+Bien cordialement,
+Houssem ADOUNI
+
+
+---------------------------------------------------------------
+Cet email est envoyée en automatique depuis mon application web www.houssem-adouni.com
+si vous recevez cet email par erreur veuillez me le signaler.
+---------------------------------------------------------------
 """

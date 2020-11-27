@@ -68,7 +68,8 @@ class RdvView(APIView):
                 send_mail(
                     "Confirmation d'entretion",
                     email.email_body.format(
-                        name=serializer.data['username'],
+                        name=serializer.data['name'],
+                        link=serializer.data['teams_link']
                     ),
                     'noreply.houssem.adouni@gmail.com',
                     [serializer.data['email']],

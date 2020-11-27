@@ -9,6 +9,8 @@ from rest_framework.authtoken.models import Token
 
 class Account(models.Model):
     code = models.CharField(max_length=300)
+    email = models.EmailField(max_length=300, blank=True, null=True)
+    name = models.CharField(max_length=300, blank=True, null=True)
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,

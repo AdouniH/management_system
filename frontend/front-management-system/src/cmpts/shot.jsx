@@ -57,7 +57,7 @@ export default function ShotPicker(props) {
   let {id} = useParams()
   const token = useSelector(state => state.auth.token);
 
-  const [username, setUsername] = useState(null);
+  const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [duree, setDuree] = useState('30');
   const [toolvalue, setToolValue] = useState('teams');
@@ -74,7 +74,7 @@ export default function ShotPicker(props) {
   const SubmitForm = (event) => {
       event.preventDefault();
       var context = {
-          username: username,
+          name: name,
           email: email,
           duree: duree,
           tool: toolvalue,
@@ -96,8 +96,8 @@ export default function ShotPicker(props) {
   useEffect(() => {
       axios.post(REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
           .then(function (response) {
-              setUsername(response.data.userdata.username)
-              setEmail(response.data.userdata.email)
+              setName(response.data.name)
+              setEmail(response.data.email)
           })
           .catch(function (error) {
           })
@@ -135,9 +135,9 @@ export default function ShotPicker(props) {
                   <p>Votre Nom</p>
                   <input className='finput'
                     type='text'
-                    name='username'
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
+                    name='name'
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
                   />
               </div>
               <div className='rowform'>
