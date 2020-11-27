@@ -3,3 +3,5 @@ static
 .spyproject
 db.sqlite3
 __pycache__
+.env
+pwd.txt

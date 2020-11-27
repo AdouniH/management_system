@@ -1,13 +1,37 @@
 version: "3.3"
 
 services:
+  db:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+        - "5432:5432"
+    volumes:
+        - ${data_path}:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: houssemadouni11@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - db
+
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-       - ${static_root}:/code/static
-       - ${pwd_file}:/code/pwd.txt
+       - ./static:/code/static
+    environment:
+      EPASS: ${EPASS}
 
   frontend:
     build:
@@ -23,7 +47,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     volumes:
-       - ${static_root}:/code/static
+       - ./static:/code/static
     ports:
       - 8000:80
     depends_on:
