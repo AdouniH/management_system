@@ -1,0 +1,38 @@
+
+.reg_table{
+}
+
+.reg_tr th{
+    border: 1px solid black;
+}
+
+.reg_tr td{
+    border: 1px solid black;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+.clickable:hover{
+    background-color: gray;
+}
+
+.reg_form{
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    background-color: black;
+    padding: 10px;
+    width: 400px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.reg_in{
+    width: 80%;
+}
+
+.reg_button{
+    width: 20%;
+}

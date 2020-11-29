@@ -21,14 +21,6 @@ function App() {
       dispatch(checkConnection());
   }, []);
 
-  var a = {
-    code: "string",
-    userdata: {
-        username: "string",
-        email: "string"
-    }
-  }
-
   return (
     <div className="App">
         <Routing/>

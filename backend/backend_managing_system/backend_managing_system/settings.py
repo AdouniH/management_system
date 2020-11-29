@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'auth_app',
     'corsheaders',
-    'calendar_app'
+    'calendar_app',
+    'btg'
 ]
 
 MIDDLEWARE = [

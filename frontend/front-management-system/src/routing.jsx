@@ -14,6 +14,11 @@ import ShotPicker from './cmpts/shot.jsx'
 import FormSucess, {FormFail} from './cmpts/formsucess.jsx'
 
 
+import Btg from './btg/btg_app.jsx'
+import RegisterDetail from './btg/registerDetail.jsx'
+import RegisterCreation from './btg/creationRegister.jsx'
+
+
 const PrivateRoute = ({component: Component, ...rest}) => {
     var connected = useSelector(state => state.auth.connected)
     var loading = useSelector(state => state.auth.loading)
@@ -44,6 +49,11 @@ export default function Routing() {
               <PrivateRoute exact path="/Shot/:id" component={ShotPicker} />
               <PrivateRoute exact path="/formsucess" component={FormSucess} />
               <PrivateRoute exact path="/formfail" component={FormFail} />
+
+              <Route exact path="/btg" component={Btg} />
+              <Route exact path="/btg/:ntf" component={RegisterDetail} />
+              <Route exact path="/btg/to/creation" component={RegisterCreation} />
+
           </Switch>
         </div>
     </Router>

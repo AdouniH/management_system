@@ -18,14 +18,14 @@
     margin-top: 30px;
 }
 
-table{
+.cal_table{
     background-color: #d6d6c1;
     padding: 25px;
     box-shadow: 10px 14px 18px 15px rgba(0, 0, 0, 0.2), 10px 16px 10px 0px rgba(0, 0, 0, 0.19);
     border-radius: 15px;
 }
 
-th{
+.cal_th{
     padding-right: 50px;
     border-bottom: solid;
     border-color: black;
@@ -33,11 +33,11 @@ th{
 }
 
 
-tr{
+.cal_tr{
   padding: 50px;
 }
 
-td{
+.cal_td{
     margin-left: 4px;
     margin-right: 4px;
 }

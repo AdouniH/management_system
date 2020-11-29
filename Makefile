@@ -5,7 +5,7 @@ run-dev:
 		sudo docker-compose -f docker-compose-dev.yml up
 
 run-dev-backend:
-		sudo docker-compose -f docker-compose-dev.yml run backend python manage.py runserver 0.0.0.0:8000
+		sudo docker-compose -f docker-compose-dev.yml run backend
 
 build:
 		sudo docker-compose build
