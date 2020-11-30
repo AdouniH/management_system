@@ -1,27 +1,34 @@
 
-.reg_table{
+.op{
+    height: 70px;
+    overflow: hidden;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .reg_tr th{
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .reg_tr td{
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .clickable{
     cursor: pointer;
+    height: 80px;
 }
 
 .clickable:hover{
-    background-color: gray;
+    background-color: #9ed18c;
 }
 
 .reg_form{
     margin-top: 20px !important;
-    margin-bottom: 20px !important;
-    background-color: black;
+
     padding: 10px;
     width: 400px;
     margin: auto;
@@ -29,10 +36,70 @@
     justify-content: space-between;
 }
 
+.reg_loading{
+    height: 30px;
+    text-align: center;
+}
+
 .reg_in{
-    width: 80%;
+    width: 60%;
+    height: 30px;
+    text-align: center;
 }
 
 .reg_button{
     width: 20%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    cursor: pointer;
+    border: None;
+    background-color: #37a828;
+    color: white;
+}
+
+.reg_button:hover{
+    font-size: 16px;
+}
+
+.reg_button_refresh{
+    width: 20%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    border: None;
+    background-color: #dbd000;
+    color: white;
+}
+
+.reg_button_refresh:hover{
+    font-size: 16px;
+}
+
+.reg_button_area{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.reg_table_div{
+    display: flex;
+    justify-content: center;
+}
+
+.reg_table{
+    max-width: 600px;
+    padding: 10px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.reg_tr tr{
+    height: 100px !important;
+    overflow: scroll;
+}
+.reg_th, .reg_td {
+  text-align: center;
+  padding: 8px;
+  max-width: 100px;
+  min-height: 20px;
+  overflow: scroll;
 }

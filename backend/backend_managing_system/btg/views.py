@@ -8,7 +8,7 @@ from rest_framework import status
 
 class RegisterView(APIView):
     def get(self, request, format=None):
-        registers = Register.objects.all().order_by('-ntf')
+        registers = Register.objects.all().order_by('ntf')
         data = BtgSerializer(registers, many=True).data
         data = list(map(lambda x: list(x.values())[1:], data))
         return Response(data)
@@ -33,7 +33,7 @@ class DetailView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, ntf, format=None):
         register = Register.objects.get(ntf=ntf)
@@ -47,4 +47,4 @@ class CreationView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

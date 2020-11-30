@@ -3,11 +3,13 @@ import Navbar from './cmpts/navbar.jsx'
 import {useParams, useHistory} from "react-router-dom";
 import axios from 'axios'
 import {REACT_APP_BACKEND_URL} from '../config_urls.js'
-
+import './style/register_detail.css'
+import vald from './style/vald.png'
 
 function RegisterDetail(props) {
   let {ntf} = useParams();
-  const {history} = useHistory();
+  const history = useHistory();
+  const [valid, setValid] = useState(props.validation)
   const [data, setData] = useState({
       ntf: null,
       serie: null,
@@ -33,48 +35,86 @@ function RegisterDetail(props) {
       axios.put(REACT_APP_BACKEND_URL + 'btg/' + ntf +'/', data)
          .then(res => {
             setData({...data, ntf: res.data.ntf})
-            props.history.push('/btg/' + res.data.ntf.toString() +'/');
+            history.push('/validation/btg/' + res.data.ntf.toString() +'/');
+            setValid(true)
          })
          .catch(function (error) {
-             alert("nok");
+             alert("Numero TF doit etre un entier unique");
          })
   }
 
   const deleteRegister = () => {
       axios.delete(REACT_APP_BACKEND_URL + 'btg/' + ntf)
          .then(res => {
-              props.history.push("/btg/")
+              history.push("/btg/")
          })
          .catch(function (error) {
          })
   }
 
   const finish = () => {
-        props.history.push("/btg/")
+        history.push("/btg/")
   }
 
   return (
     <div>
       <Navbar/>
-      {ntf}
-      <form onSubmit={FormSubmit}>
-          <label>Numero TF:</label>
-          <input onChange={(event) => {setData({...data, ntf:event.target.value})}} type="text" value={data.ntf}></input><br/>
-          <label>Serie:</label>
-          <input onChange={(event) => {setData({...data, serie:event.target.value})}} type="text" value={data.serie}></input><br/>
-          <label>Dernier N de LP affecté:</label>
-          <input onChange={(event) => {setData({...data, lp:event.target.value})}} type="text" value={data.lp}></input><br/>
-          <label>Dernier N de Plle affecté:</label>
-          <input onChange={(event) => {setData({...data, plle:event.target.value})}} type="text" value={data.plle}></input><br/>
-          <label>Dernier N de brne affecté:</label>
-          <input onChange={(event) => {setData({...data, brne:event.target.value})}} type="text" value={data.brne}></input><br/>
-          <label>Observations:</label>
-          <input onChange={(event) => {setData({...data, obs:event.target.value})}} type="text" value={data.obs}></input><br/>
+      <div className="detail_all">
+          <form className="detail_form" onSubmit={FormSubmit}>
+              <div className="detail_row">
+                  <label>Numero TF:</label>
+                  <div>
+                      <input className="in_row"onChange={(event) => {
+                        setData({...data, ntf:event.target.value}); setValid(false)}} type="text" value={data.ntf}></input><br/>
+                  </div>
+              </div>
 
-          <button> Enregistrer </button>
-          <button type="button" onClick={deleteRegister}> Supprimer </button>
-          <button type="button" onClick={finish}> Partir </button>
-      </form>
+              <div className="detail_row">
+                  <label>Serie:</label>
+                  <div>
+                      <input onChange={(event) => {
+                        setData({...data, serie:event.target.value});setValid(false)}} type="text" value={data.serie}></input><br/>
+                  </div>
+              </div>
+
+
+              <div className="detail_row">
+                  <label>Dernier N de LP affecté:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, lp:event.target.value});setValid(false)}} type="text" value={data.lp}></input><br/>
+                  </div>
+              </div>
+
+              <div className="detail_row">
+                  <label>Dernier N de Plle affecté:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, plle:event.target.value});setValid(false)}} type="text" value={data.plle}></input><br/>
+                  </div>
+              </div>
+
+              <div className="detail_row">
+                  <label>Dernier N de brne affecté:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, brne:event.target.value});setValid(false)}} type="text" value={data.brne}></input><br/>
+                  </div>
+              </div>
+
+              <div className="detail_row">
+                  <label>Observations:</label>
+                  <div>
+                      <textarea className="detail_txt" onChange={(event) => {setData({...data, obs:event.target.value}); setValid(false)}} type="text" value={data.obs}></textarea><br/>
+                  </div>
+              </div>
+              <div className="detail_row">
+                  <button className="detail_btn a" > Enregistrer </button>
+                  <button className="detail_btn b" type="button" onClick={deleteRegister}> Supprimer </button>
+                  <button className="detail_btn c" type="button" onClick={finish}> Partir </button>
+              </div>
+              <div className="vld">
+                  {valid ? <img className="vald" src={vald} alt="Logo" /> : null}
+              </div>
+          </form>
+      </div>
     </div>
   );
 }

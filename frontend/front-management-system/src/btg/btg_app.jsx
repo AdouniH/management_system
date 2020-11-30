@@ -3,11 +3,11 @@ import Navbar from './cmpts/navbar.jsx'
 import Register from './cmpts/register.jsx'
 
 
-function Btg() {
+function Btg(props) {
   return (
     <div>
       <Navbar/>
-      <Register/>
+      <Register validation={props.validation}/>
     </div>
   );
 }

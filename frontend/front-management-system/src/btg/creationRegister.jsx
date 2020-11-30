@@ -25,35 +25,65 @@ function RegisterCreation(props) {
       axios.post(REACT_APP_BACKEND_URL + 'btg/creation/', data)
          .then(res => {
             console.log(res.data);
-            props.history.push('/btg/' + res.data.ntf);
+            props.history.push('/validation/btg/' + res.data.ntf);
          })
          .catch(function (error) {
-             alert("nok");
+
+             alert("Numero TF doit etre un entier unique");
          })
   }
 
   return (
     <div>
       <Navbar/>
-      {ntf}
-      <form onSubmit={FormSubmit}>
-          <label>Numero TF:</label>
-          <input onChange={(event) => {setData({...data, ntf:event.target.value})}} type="text" value={data.ntf}></input><br/>
-          <label>Serie:</label>
-          <input onChange={(event) => {setData({...data, serie:event.target.value})}} type="text" value={data.serie}></input><br/>
-          <label>Dernier N de LP affecté:</label>
-          <input onChange={(event) => {setData({...data, lp:event.target.value})}} type="text" value={data.lp}></input><br/>
-          <label>Dernier N de Plle affecté:</label>
-          <input onChange={(event) => {setData({...data, plle:event.target.value})}} type="text" value={data.plle}></input><br/>
-          <label>Dernier N de brne affecté:</label>
-          <input onChange={(event) => {setData({...data, brne:event.target.value})}} type="text" value={data.brne}></input><br/>
-          <label>Observations:</label>
-          <input onChange={(event) => {setData({...data, obs:event.target.value})}} type="text" value={data.obs}></input><br/>
+      <div className="detail_all">
+          <form onSubmit={FormSubmit}>
+              <div className="detail_row">
+                  <label>Numero TF:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, ntf:event.target.value})}} type="text" value={data.ntf}></input><br/>
+                  </div>
+              </div>
 
-          <button> Enregistrer </button>
+              <div className="detail_row">
+                  <label>Serie:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, serie:event.target.value})}} type="text" value={data.serie}></input><br/>
+                  </div>
+              </div>
 
+              <div className="detail_row">
+                  <label>Dernier N de LP affecté:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, lp:event.target.value})}} type="text" value={data.lp}></input><br/>
+                  </div>
+              </div>
 
-      </form>
+              <div className="detail_row">
+                  <label>Dernier N de Plle affecté:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, plle:event.target.value})}} type="text" value={data.plle}></input><br/>
+                  </div>
+              </div>
+              <div className="detail_row">
+                  <label>Dernier N de brne affecté:</label>
+                  <div>
+                      <input onChange={(event) => {setData({...data, brne:event.target.value})}} type="text" value={data.brne}></input><br/>
+                  </div>
+              </div>
+
+              <div className="detail_row">
+                  <label>Observations:</label>
+                  <div>
+                      <textarea className="detail_txt"  onChange={(event) => {setData({...data, obs:event.target.value})}} type="text" value={data.obs}></textarea><br/>
+                  </div>
+              </div>
+              <div className="detail_buttonse">
+                  <button className="a"> Enregistrer </button>
+                  <button className="d" type="button" onClick={() => {props.history.push("/btg")}}> Annuler </button>
+              </div>
+          </form>
+      </div>
     </div>
   );
 }

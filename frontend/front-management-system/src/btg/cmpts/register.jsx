@@ -8,8 +8,8 @@ import { useHistory } from "react-router-dom";
 function Row(props){
   let history = useHistory();
   return (
-      <tr onClick={() => {history.push("/btg/" + props.ntf);}} className="reg_tr clickable">
-          {props.data.map((subentity) => <td>{subentity}</td>)}
+      <tr className="reg_tr" onClick={() => {history.push("/btg/" + props.ntf);}} className="reg_tr clickable">
+          {props.data.map((subentity) => <td className="reg_td"><div className="op">{subentity}</div></td>)}
       </tr>
   );
 }
@@ -17,6 +17,7 @@ function Row(props){
 
 function Register() {
   const [tf, setTf] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
       header: [
         'Numero TF',
@@ -30,11 +31,14 @@ function Register() {
   })
 
    useEffect(() => {
+     setLoading(true)
      axios.get(REACT_APP_BACKEND_URL + 'btg')
         .then(res => {
+           setLoading(false)
            setData({...data, body:res.data});
         })
         .catch(function (error) {
+          setLoading(false)
         })
    }, []);
 
@@ -50,32 +54,38 @@ function Register() {
 
   const submitForm = (event) => {
       event.preventDefault();
+      setLoading(true)
       if (tf){
         axios.post(REACT_APP_BACKEND_URL + 'btg/', {ntf: tf})
            .then(res => {
               setData({...data, body:res.data});
+              setLoading(false)
            })
            .catch(function (error) {
+              setData({...data, body:[]});
+              setLoading(false)
            })
       }
       else{
         axios.get(REACT_APP_BACKEND_URL + 'btg')
            .then(res => {
               setData({...data, body:res.data});
+              setLoading(false)
            })
            .catch(function (error) {
+               setLoading(false)
            })
       }
-
   }
 
   return (
     <div>
-      <h1>{tf}</h1>
       <form className="reg_form">
+              <button className="reg_button_refresh" type="button" onClick={refresh}>rafraichir</button>
               <input
                 className="reg_in"
-                type='number'
+                type='text'
+                placeholder="Chercher"
                 value={tf}
                 onChange={(event) => {setTf(event.target.value)}}
               />
@@ -85,14 +95,18 @@ function Register() {
                 value='Chercher'
                 onClick={submitForm}
               />
-              <button type="button" onClick={() => {refresh()}}>refresh</button>
       </form>
-      <table className="reg_table">
-              <tr className="reg_tr">
-                  {data.header.map((entity) => <th>{entity}</th>)}
-              </tr>
-              {data.body.map((entity) => <Row data={entity} ntf={entity[0]}/>)}
-      </table>
+          <div className="reg_loading">
+              {loading ? "Loading ..."  : null}
+          </div>
+      <div className="reg_table_div">
+          <table className="reg_table">
+                  <tr className="reg_tr">
+                      {data.header.map((entity) => <th className="reg_th">{entity}</th>)}
+                  </tr>
+                  {data.body.map((entity) => <Row data={entity} ntf={entity[0]}/>)}
+          </table>
+      </div>
     </div>
   );
 }

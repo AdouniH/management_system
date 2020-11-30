@@ -50,8 +50,10 @@ export default function Routing() {
               <PrivateRoute exact path="/formsucess" component={FormSucess} />
               <PrivateRoute exact path="/formfail" component={FormFail} />
 
-              <Route exact path="/btg" component={Btg} />
-              <Route exact path="/btg/:ntf" component={RegisterDetail} />
+              <Route exact path="/btg" render={() => <Btg/>} />
+
+              <Route exact path="/btg/:ntf" render={() => <RegisterDetail validation={false} />} />
+              <Route exact path="/validation/btg/:ntf" render={() => <RegisterDetail validation={true} />} />
               <Route exact path="/btg/to/creation" component={RegisterCreation} />
 
           </Switch>
