@@ -6,30 +6,44 @@ import {useSelector} from 'react-redux'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import './style/shot.css'
 import {REACT_APP_BACKEND_URL} from '../config_urls.js'
+import load from './style/load.gif'
 
 
 function Teams(props) {
+  const [linkexist, setLinkexist] = useState(false)
   useEffect(() => {
     axios.get(REACT_APP_BACKEND_URL + 'calendar/team')
         .then(function (response) {
             props.setLink(response.data.link);
+            if (response.data.link){
+                setLinkexist(true);
+            }
+
         })
         .catch(function (error) {
+            setLinkexist(false);
         })
     return () => { props.setLink(null)}
   }, [])
 
   return (
       <div>
-          <p className="info"> En confirmant la réunion vous recevez un mail de confirmation avec le lien de la reunion teams</p>
+          <p className="info">
+              En confirmant la réunion vous recevez un mail de confirmation
+              avec le lien de la reunion TEAMS
+          </p>
       </div>
   );
 }
 
 function Skype() {
+
   return (
       <div>
-        <p className="info"> En confirmant la réunion vous recevez un mail de confirmation avec mon identifiant Skype</p>
+          <p className="info">
+              En confirmant la réunion vous recevez un mail de confirmation
+              avec le lien de la reunion SKYPE
+          </p>
       </div>
   );
 }
@@ -39,7 +53,7 @@ function Phone() {
       <div>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
-      <p className="infophone"> Voici mon muméro :</p>
+      <p className="infophone">En confirmant la réunion vous recevez un mail contenant mon numéro de télephone</p>
       <div className="center">
           <input className='phone' type='text' value='0758553568'/>
           <CopyToClipboard text='0758553568'
@@ -65,6 +79,8 @@ export default function ShotPicker(props) {
   const [tarea, setTarea] = useState('');
   const [date, setDate] = useState('');
   const [hour, setHour] = useState('');
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [initLoading, setInitLoading] = useState(false);
 
 
   const toolChanged = (event) => {
@@ -73,31 +89,34 @@ export default function ShotPicker(props) {
 
   const SubmitForm = (event) => {
       event.preventDefault();
+      setSubmitLoading(true);
       var context = {
           name: name,
           email: email,
           duree: duree,
           tool: toolvalue,
-          teams_link: link,
           crenau: id,
           comment: tarea
       }
       axios.post(REACT_APP_BACKEND_URL + 'calendar/rdv', context)
           .then(function (response) {
               console.log(response.data);
+              setSubmitLoading(false);
               history.push("/formsucess");
           })
           .catch(function (error) {
               console.log(error.response.data);
+              setSubmitLoading(false);
               history.push("/formfail");
           })
   }
 
   useEffect(() => {
+      setInitLoading(true);
       axios.post(REACT_APP_BACKEND_URL + 'auth/userdata_from_token/', {token: token})
           .then(function (response) {
-              setName(response.data.name)
-              setEmail(response.data.email)
+              setName(response.data.name);
+              setEmail(response.data.email);
           })
           .catch(function (error) {
           })
@@ -106,8 +125,10 @@ export default function ShotPicker(props) {
           .then(function (response) {
               setDate(response.data.date);
               setHour(response.data.hour);
+              setInitLoading(false);
           })
           .catch(function (error) {
+              setInitLoading(false);
               history.push("/Calendar");
           })
   }, [])
@@ -127,10 +148,16 @@ export default function ShotPicker(props) {
       <div className="all">
           <NavBar/>
           <form className="forma" onSubmit={SubmitForm}>
-              <div className='title'>
-                  <h4> Veuillez confirmer cet entretien du </h4>
-                  <h4> {date} à {hour}</h4>
-              </div>
+
+              {initLoading
+                                    ?
+                  <img className="loadimg" src={load}></img>
+                                    :
+                  <div className='title'>
+                      <h4> Veuillez confirmer cet entretien du </h4>
+                      <h4> {date} à {hour}</h4>
+                  </div>
+              }
               <div className='rowform'>
                   <p>Votre Nom</p>
                   <input className='finput'
@@ -165,7 +192,7 @@ export default function ShotPicker(props) {
                   <select onChange={toolChanged}>
                       <option value="teams">Microsoft Teams</option>
                       <option value="skype">Skype</option>
-                      <option value="phone">Phone</option>
+                      <option value="phone">Appel télephonique</option>
                   </select>
               </div>
               <div className='rowform'>
@@ -181,9 +208,12 @@ export default function ShotPicker(props) {
                   </textarea>
               </div>
               <br/>
-              <div className='rowform'>
+              <div className='rowforma'>
+                  {submitLoading ? <img className="loadimg" src={load}></img> : null}
                   <input className='submitf' type='submit' value='confirmer votre rendez vous'/>
+                  {submitLoading ? <img className="loadimg" src={load}></img> : null}
               </div>
+
           </form>
       </div>
   );

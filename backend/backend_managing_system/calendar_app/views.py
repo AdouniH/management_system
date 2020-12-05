@@ -7,11 +7,12 @@ from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from calendar_app import doc
 from datetime import date, timedelta
-from calendar_app.models import Calendar, TeamLink, Rdv
+from calendar_app.models import Calendar, TeamLink, SkypeLink, Rdv
 from calendar_app.serializers import CalendarSerializer, TeamLinkSerializer, RdvSerializer
 
 from calendar_app.business import email
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 
 class CalendarView(APIView):
@@ -29,14 +30,17 @@ class CalendarView(APIView):
 
 class ShotPicker(APIView):
     def get(self, request, creneau_id, format=None):
-        cr = Calendar.objects.get(id=creneau_id)
-        serializer = CalendarSerializer(cr)
-        context = serializer.data
-        date = datetime_to_readable(cr.creneau)
-        hour = extract_hour(cr.creneau)
+        try:
+            cr = Calendar.objects.get(id=creneau_id)
+            serializer = CalendarSerializer(cr)
+            context = serializer.data
+            date = datetime_to_readable(cr.creneau)
+            hour = extract_hour(cr.creneau)
 
-        context.update({'hour': hour, 'date': date})
-        return Response(context)
+            context.update({'hour': hour, 'date': date})
+            return Response(context, status=status.HTTP_200_OK)
+        except:
+            return Response({}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TeamsLInkPicker(APIView):
@@ -56,24 +60,83 @@ class RdvView(APIView):
         serializer = RdvSerializer(data=request.data)
 
         if serializer.is_valid():
-            serializer.save()
+            rdv = serializer.save()
             cal = Calendar.objects.get(id=serializer.data['crenau'])
             cal.booked = True
             cal.save()
 
-            if serializer.data['tool'] == 'teams':
-                link = TeamLink.objects.get(link=serializer.data['teams_link'])
-                link.delete()
+            readable_time = '{} à {}'.format(datetime_to_readable(cal.creneau), extract_hour(cal.creneau))
 
-                send_mail(
-                    "Confirmation d'entretion",
-                    email.email_body.format(
-                        name=serializer.data['name'],
-                        link=serializer.data['teams_link']
+            if serializer.data['tool'] == 'teams':
+                try:
+                    link = TeamLink.objects.all()[0]
+                    if link.link:
+                        rdv.link = link.link
+                        rdv.save()
+                        link.delete()
+                        EmailMessage(
+                            "Confirmation d'entretion du {}".format(readable_time),
+                            email.email_body_with_team_link.format(
+                                time=readable_time,
+                                link=rdv.link
+                            ),
+                            'Serveur de Houssem ADOUNI <noreply.houssem.adouni@gmail.com>',
+                            [serializer.data['email']],
+                            cc=['houssemadouni11@gmail.com']
+                        ).send(fail_silently=True)
+                except:
+                    EmailMessage(
+                        "Confirmation d'entretion du {}".format(readable_time),
+                        email.email_body_without_team_link.format(
+                            time=readable_time
+                        ),
+                        'Serveur de Houssem ADOUNI <noreply.houssem.adouni@gmail.com>',
+                        [serializer.data['email']],
+                        cc=['houssemadouni11@gmail.com']
+                    ).send(fail_silently=True)
+
+
+            elif serializer.data['tool'] == 'skype':
+                try:
+                    link = SkypeLink.objects.all()[0]
+                    if link.link:
+                        rdv.link = link.link
+                        rdv.save()
+                        link.delete()
+
+                    EmailMessage(
+                        "Confirmation d'entretion du {}".format(readable_time),
+                        email.email_body_skype.format(
+                            link=rdv.link,
+                            time=readable_time
+                        ),
+                        'Serveur de Houssem ADOUNI <noreply.houssem.adouni@gmail.com>',
+                        [serializer.data['email']],
+                        cc=['houssemadouni11@gmail.com']
+                    ).send(fail_silently=True)
+                except:
+                    EmailMessage(
+                        "Confirmation d'entretion du {}".format(readable_time),
+                        email.email_body_skype_without_link.format(
+                            link=rdv.link,
+                            time=readable_time
+                        ),
+                        'Serveur de Houssem ADOUNI <noreply.houssem.adouni@gmail.com>',
+                        [serializer.data['email']],
+                        cc=['houssemadouni11@gmail.com']
+                    ).send(fail_silently=True)
+
+            elif serializer.data['tool'] == 'phone':
+                EmailMessage(
+                    "Confirmation d'entretion du {}".format(readable_time),
+                    email.email_body_phone.format(
+                        time=readable_time
                     ),
-                    'noreply.houssem.adouni@gmail.com',
+                    'Serveur de Houssem ADOUNI <noreply.houssem.adouni@gmail.com>',
                     [serializer.data['email']],
-                    fail_silently=False,
-                )
+                    cc=['houssemadouni11@gmail.com']
+                ).send(fail_silently=True)
+
+            serializer = RdvSerializer(rdv)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -9,6 +9,7 @@
 
 .logwindow{
     width: 400px;
+    max-width: 80%;
 }
 
 .formLog{
