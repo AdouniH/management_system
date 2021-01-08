@@ -6,15 +6,12 @@ import { connect, checkConnection } from '../redux'
 import {useHistory} from "react-router-dom";
 import logologin from './style/statics/login.jpg'
 import {REACT_APP_BACKEND_URL} from '../config_urls.js'
+import { TextField } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+import bienvenue from './style/statics/bienvenue.png'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
-
-function Error(props) {
-    return (
-        <div className="tempo1">
-            <p>Saisissez un code valide</p>
-        </div>
-    )
-}
 
 function Loading(props) {
     return (
@@ -24,8 +21,19 @@ function Loading(props) {
     )
 }
 
+const useStyles = makeStyles({
+  root: {
+    height: 38,
+    marginTop: '15px'
+  },
+  progress: {
+    marginTop: 10
+  }
+});
+
 
 function LoginPage() {
+    const classes = useStyles();
     const dispatch = useDispatch();
     var connected = useSelector(state => state.auth.connected);
     var loader = useSelector(state => state.auth.loading);
@@ -35,7 +43,6 @@ function LoginPage() {
     const [pageisLoading, setPageisLoading] = useState(false);
 
     let history = useHistory();
-
 
     useEffect(() => {
         if (connected){history.push('/Calendar')};
@@ -63,32 +70,34 @@ function LoginPage() {
         setCode(event.target.value);
     }
 
-    var tempcomp
-
-    if(error && !pageisLoading){
-        tempcomp = <Error/>
-    }
-
-    if(pageisLoading){
-        tempcomp = <Loading/>
-    }
     if (!loader){
         return (
             <div className="body">
-                <div className="logwindow">
-                         <form className="formLog" onSubmit={login}>
-                             <label className="labelLog" for="code">Veuillez saisir votre code</label>
-                             <img className='limg' src={logologin}/>
-                             <input className="txtLog" autocomplete="off" name="code" type='text' value={code} onChange={handleChange}/>
-                             <input className="buttonLog" type='submit' value='Login'/>
-                             {tempcomp}
-                         </form>
-                 </div>
+              <div className="logwindow">
+                 <form className="formLog" onSubmit={login}>
+                    <img className="t" src={bienvenue} alt="bienvenue" />
+                    <TextField
+                         error={error && !pageisLoading}
+                         id="outlined-search"
+                         label={error && !pageisLoading ? "Saisissez un code valide": "Votre code"}
+                         type="search"
+                         variant="outlined"
+                         value={code}
+                         onChange={handleChange}
+                         size="small"
+                     />
+                     <Button className={classes.root} variant="contained" color="primary" type='submit'>
+                        Login
+                     </Button>
+                     <div className='h'>
+                        {pageisLoading ?    <LinearProgress className={classes.progress} /> : null}
+                     </div>
+                 </form>
+               </div>
             </div>
         )
     }
     else{return(<Loading/>)}
 }
-
 
 export default LoginPage;

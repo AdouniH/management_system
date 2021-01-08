@@ -4,79 +4,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(black, #9198e5);
-}
-
-.logwindow{
-    width: 400px;
-    max-width: 80%;
 }
 
 .formLog{
     display: flex;
     flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+.logwindow{
     background-color: white;
-    border-radius: 25px;
-    box-shadow: 10px 14px 18px 0 rgba(0, 0, 0, 0.2), 10px 16px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.labelLog{
-    text-align: center;
-    margin-top: 25px !important;
-    margin-bottom: 15px !important;
-    margin: auto;
-}
-
-.limg{
-    height: 220px;
-    width: 220px;
-    margin: auto;
-    margin-bottom: 12px;
-    border-radius: 250px
-}
-
-.txtLog{
-    height: 35px;
-    width: 78%;
-    margin: auto;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: blue;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-radius: 4px 40px 4px 4px;
-    box-shadow: 10px 14px 18px 0 rgba(0, 0, 0, 0.2), 10px 16px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.buttonLog{
-    height: 39px;
-    width: 82%;
-    background-color: #004d00;
-    border: None;
-    margin: auto;
-    margin-bottom: 58px;
-    color: white;
+    padding: 40px;
     border-radius: 10px;
-    cursor: pointer;
+    border: solid gray 1px;
+    box-shadow: 12px 12px 2px 1px rgba(0, 0, 200, .2);
+    width: 450px;
 }
 
-.buttonLog:hover{
-    font-size: 16px;
-    background-color: #001a00;
+.t{
+  margin-bottom: 20px;
 }
 
-.tempo1{
-    color: red;
-    top: -50px;
-    position: relative;
-    margin: auto;
+.h{
+  margin-top: 15px;
+  position: absolute;
+  width: 100%;
+  bottom: -15px;
 }
 
-.tempo2{
-    color: black;
-    top: -50px;
-    position: relative;
-    margin: auto;
+@media only screen and (max-width: 600px) {
+  .logwindow {
+    width: 50%
+  }
 }

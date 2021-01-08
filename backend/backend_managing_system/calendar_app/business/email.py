@@ -21,7 +21,7 @@ si vous recevez cet email par erreur veuillez me le signaler /==> houssemadouni1
 email_body_without_team_link = """
 Bonjour,
 
-Je vous confirme ma présence à cet entretien : {time}
+Je vous confirme ma présence à cet entretien le {time}
 
 Je vous enverrai le lien de la réunion Microsoft Teams 15 minutes avant le debut de la réunion.
 
@@ -56,10 +56,11 @@ Si vous recevez cet email par erreur veuillez me le signaler /==> houssemadouni1
 email_body_skype="""
 Bonjour,
 
-Je vous confirme ma présence à cet entretien.
+Je vous confirme ma présence à cet entretien le {time}
 
-Voici mon identifiant Skype : {link}
-N'oubliez pas de m'appeler sur le {time}
+Rejoignez la réunion Skype via le lien suivant:
+
+{link}
 
 Bien cordialement,
 Houssem ADOUNI
@@ -74,7 +75,7 @@ Si vous recevez cet email par erreur veuillez me le signaler /==> houssemadouni1
 email_body_skype_without_link="""
 Bonjour,
 
-Je vous confirme ma présence à cet entretien : {time}
+Je vous confirme ma présence à cet entretien le {time}
 
 Je vous enverrai le lien de la réunion Skype 15 minutes avant le debut de la réunion.
 
