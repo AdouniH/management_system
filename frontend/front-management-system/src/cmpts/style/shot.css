@@ -1,3 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,700&display=swap');
+body{
+  font-family: 'Crimson Text', serif;
+  font-size: 22px;
+}
+
 .title{
     padding: 20px;
     display: flex;
@@ -6,7 +13,8 @@
     margin-bottom: 10px;
 }
 .all{
-    height: 100vh
+    height: 100vh;
+
 }
 
 .forma{
@@ -17,20 +25,20 @@
     flex-direction: column;
     margin: auto;
     width: 500px;
-    border-left: solid;
-    border-right: solid;
-    border-width: 1px;
     margin-bottom: 15px;
     margin-top: 15px;
+    border-radius: 15px;
+
 }
 
 .rowform{
     width: 500px;
+    margin-top: 25px;
 
 }
 
 .rowforma{
-    width: 500px;
+    width: 100%;
     display: flex;
 }
 
@@ -110,4 +118,10 @@ textarea{
 .loadimg{
     height: 50px;
     width: 50px;
+}
+
+@media only screen and (max-width: 700px) {
+  .forma {
+      width: 70%;
+  }
 }
