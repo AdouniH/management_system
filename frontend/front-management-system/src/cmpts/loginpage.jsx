@@ -28,6 +28,9 @@ const useStyles = makeStyles({
   },
   progress: {
     marginTop: 10
+  },
+  input_code: {
+    backgroundColor: 'white'
   }
 });
 
@@ -75,8 +78,8 @@ function LoginPage() {
             <div className="body">
               <div className="logwindow">
                  <form className="formLog" onSubmit={login}>
-                    <img className="t" src={bienvenue} alt="bienvenue" />
                     <TextField
+                         className={classes.input_code}
                          error={error && !pageisLoading}
                          id="outlined-search"
                          label={error && !pageisLoading ? "Saisissez un code valide": "Votre code"}
