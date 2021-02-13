@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './style/login.css';
+
 import axios from 'axios'
 import CheckLocalStorage from './check_storage.jsx'
 import NavBar from './navbar.jsx'

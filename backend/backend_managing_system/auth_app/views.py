@@ -15,13 +15,15 @@ class CodeValidator(APIView):
         code = request.data["code"].strip()
         user = Account.objects.get(code=code).user
         token, created = Token.objects.get_or_create(user=user)
+        route = Account.objects.get(code=code).route
 
         return Response({
             "token": token.key,
             "userdata":{
                 "username": user.username,
                 "email": user.email
-            }
+            },
+            "route": route
         }, status=status.HTTP_200_OK)
 
 

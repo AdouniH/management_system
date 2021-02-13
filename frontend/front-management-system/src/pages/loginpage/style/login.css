@@ -1,0 +1,40 @@
+
+
+.lpage_formLogContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(#ffffff, rgb(109, 107, 114));
+
+}
+
+.formLog{
+
+    padding: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    width: 80%;
+}
+
+.lpage_Sidelayout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url("../media/backgroundimg.jpeg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0.9;
+    border-right: black;
+    border-right: solid;
+    border-width: 1px;
+
+}

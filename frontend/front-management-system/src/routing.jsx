@@ -9,14 +9,17 @@ import {
 } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux'
 import Calendar from './cmpts/calendar.jsx'
-import LoginPage from './cmpts/loginpage.jsx'
+
 import ShotPicker from './cmpts/shot.jsx'
 import FormSucess, {FormFail} from './cmpts/formsucess.jsx'
+import Papers from './pages/papers.jsx'
 
 
 import Btg from './btg/btg_app.jsx'
 import RegisterDetail from './btg/registerDetail.jsx'
 import RegisterCreation from './btg/creationRegister.jsx'
+
+import {LoginPage} from './pages/loginpage'
 
 
 const PrivateRoute = ({component: Component, ...rest}) => {
@@ -49,12 +52,14 @@ export default function Routing() {
               <PrivateRoute exact path="/Shot/:id" component={ShotPicker} />
               <PrivateRoute exact path="/formsucess" component={FormSucess} />
               <PrivateRoute exact path="/formfail" component={FormFail} />
+              <PrivateRoute exact path="/papers" component={Papers} />
 
               <Route exact path="/btg" render={() => <Btg/>} />
 
               <Route exact path="/btg/:ntf" render={() => <RegisterDetail validation={false} />} />
               <Route exact path="/validation/btg/:ntf" render={() => <RegisterDetail validation={true} />} />
               <Route exact path="/btg/to/creation" component={RegisterCreation} />
+              
 
           </Switch>
         </div>

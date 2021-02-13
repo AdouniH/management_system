@@ -15,6 +15,12 @@ class Account(models.Model):
         User,
         on_delete=models.CASCADE,
     )
+    route = models.CharField(max_length=300,
+    choices=(
+        ('calendar', 'calendar'),
+        ('route', 'route')
+)
+,blank=True, null=True)
 
     def __str__(self):
         return self.code
