@@ -65,30 +65,31 @@ export default function LoginForm() {
 
   return (
       <div className='lpage_formLogContainer'>
-       <form className="formLog" onSubmit={login}>
-            <TextField
-                    className={classes.input_code}
-                    error={error && !pageisLoading}
-                    id="outlined-search"
-                    label={error && !pageisLoading ? "Saisissez un code valide": "Votre code"}
-                    type="search"
-                    variant="outlined"
-                    value={code}
-                    onChange={handleChange}
-                    size="small"
-            />
-            <Button 
-                    className={classes.root} 
-                    variant="contained" 
-                    color="primary" 
-                    type='submit'
-            >
-                Login
-            </Button>
-            <div>
-            {pageisLoading ?    <LinearProgress className={classes.progress} /> : null}
-            </div>
-        </form>
+        <div><p className="lpage_p"> Veuillez entrer votre code de redirection </p></div>
+        <form className="formLog" onSubmit={login}>
+                <TextField
+                        className={classes.input_code}
+                        error={error && !pageisLoading}
+                        id="outlined-search"
+                        label={error && !pageisLoading ? "Saisissez un code valide": "Votre code"}
+                        type="search"
+                        variant="outlined"
+                        value={code}
+                        onChange={handleChange}
+                        size="small"
+                />
+                <Button 
+                        className={classes.root} 
+                        variant="contained" 
+                        color="primary" 
+                        type='submit'
+                >
+                    Login
+                </Button>
+                <div>
+                {pageisLoading ?    <LinearProgress className={classes.progress} /> : null}
+                </div>
+            </form>
       </div>
   );
 }
