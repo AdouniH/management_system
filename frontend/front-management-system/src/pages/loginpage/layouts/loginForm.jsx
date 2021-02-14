@@ -84,7 +84,7 @@ export default function LoginForm() {
                         color="primary" 
                         type='submit'
                 >
-                    Login
+                    Valider
                 </Button>
                 <div>
                 {pageisLoading ?    <LinearProgress className={classes.progress} /> : null}

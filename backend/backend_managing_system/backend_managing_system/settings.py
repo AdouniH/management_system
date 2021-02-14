@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'auth_app',
     'corsheaders',
     'calendar_app',
-    'btg'
+    'btg',
+    'divers'
 ]
 
 MIDDLEWARE = [
@@ -119,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Paris'
 
 USE_I18N = True
 

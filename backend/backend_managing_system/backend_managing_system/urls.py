@@ -42,5 +42,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('auth_app.urls')),
     path('calendar/', include('calendar_app.urls')),
-    path('btg/', include('btg.urls'))
+    path('btg/', include('btg.urls')),
+    path('divers/', include('divers.urls'))
 ]
