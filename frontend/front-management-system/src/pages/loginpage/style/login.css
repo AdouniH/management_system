@@ -6,20 +6,24 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(#ffffff, rgb(109, 107, 114));
+    background: linear-gradient(#855745, rgb(234, 255, 228));
+}
 
+.lpage_mid{
+    padding: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
 }
 
 .formLog{
-
-    padding: 15px;
-    padding-top: 30px;
-    padding-bottom: 30px;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     border-radius: 5px;
-    width: 80%;
+    width: 100%;
 }
 
 .lpage_Sidelayout{
@@ -59,4 +63,14 @@ i{
 .lpage_p{
     padding: 5px;
     text-align: center;
+}
+
+.lpage_prog{
+    
+    position: absolute;
+    bottom: 0px;
+    background-color: red;
+    margin: auto;
+    left: 10px;
+    right: 10px;
 }

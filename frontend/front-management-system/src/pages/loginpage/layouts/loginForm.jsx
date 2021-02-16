@@ -14,12 +14,15 @@ import '../style/login.css';
 const useStyles = makeStyles({
     root: {
       height: 38,
-      marginTop: '15px'
+      marginTop: '15px',
+      width: '100%'
     },
     progress: {
-      marginTop: 10
+        width: "100%",
     },
     input_code: {
+        width: '100%',
+        margin: 'auto'
     }
   });
 
@@ -65,31 +68,37 @@ export default function LoginForm() {
 
   return (
       <div className='lpage_formLogContainer'>
-        <div><p className="lpage_p"> Veuillez entrer votre code de redirection </p></div>
-        <form className="formLog" onSubmit={login}>
-                <TextField
-                        className={classes.input_code}
-                        error={error && !pageisLoading}
-                        id="outlined-search"
-                        label={error && !pageisLoading ? "Saisissez un code valide": "Votre code"}
-                        type="search"
-                        variant="outlined"
-                        value={code}
-                        onChange={handleChange}
-                        size="small"
-                />
-                <Button 
-                        className={classes.root} 
-                        variant="contained" 
-                        color="primary" 
-                        type='submit'
-                >
-                    Valider
-                </Button>
-                <div>
+        <div className="lpage_mid">
+            <div className="lpage_prog"> 
                 {pageisLoading ?    <LinearProgress className={classes.progress} /> : null}
-                </div>
-            </form>
+            </div>
+            <div><p className="lpage_p"> Veuillez entrer votre code de redirection </p></div>
+
+            
+            <form className="formLog" onSubmit={login}>
+                    <TextField
+                            className={classes.input_code}
+                            error={error && !pageisLoading}
+                            id="outlined-search"
+                            label={error && !pageisLoading ? "Saisissez un code valide": "Votre code"}
+                            type="search"
+                            variant="outlined"
+                            value={code}
+                            onChange={handleChange}
+                            size="small"
+                    />
+                    <Button 
+                            className={classes.root} 
+                            variant="contained" 
+                            color="primary" 
+                            type='submit'
+                    >
+                        Valider
+                    </Button>
+
+                </form>
+                
+            </div>
       </div>
   );
 }

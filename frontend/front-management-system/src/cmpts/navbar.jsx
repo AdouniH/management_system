@@ -6,7 +6,7 @@ import './style/navbar.css';
 import {useHistory} from "react-router-dom";
 
 function NavBar() {
-  const history = useHistory()
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const clicked = () => {

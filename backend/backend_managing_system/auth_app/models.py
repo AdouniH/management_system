@@ -18,7 +18,8 @@ class Account(models.Model):
     route = models.CharField(max_length=300,
     choices=(
         ('calendar', 'calendar'),
-        ('route', 'route')
+        ('route', 'route'),
+        ('data', 'data'),
 )
 ,blank=True, null=True)
 

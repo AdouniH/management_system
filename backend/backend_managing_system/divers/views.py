@@ -5,11 +5,18 @@ from divers.serializers import IpSerializer
 
 
 class Ip(APIView):
-    """
-    List all snippets, or create a new snippet.
-    """
+
     def get(self, request, format=None):
-        serializer = IpSerializer(data=request.query_params)
+
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        
+        ip1 = 'None'
+        if x_forwarded_for:
+            ip1 = x_forwarded_for.split(',')[0]
+        
+        ip2 = request.META.get('REMOTE_ADDR')
+
+        serializer = IpSerializer(data={'ip': '{} / {}'.format(ip1, ip2)})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
