@@ -1,0 +1,11 @@
+.tbar{
+    display: flex;
+    flex-direction: row-reverse;
+    background: linear-gradient(to right, rgb(12, 0, 0) , rgb(4, 38, 100)); 
+}
+
+.datatable{
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+}
